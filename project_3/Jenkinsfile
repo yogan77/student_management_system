@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/yogan77/student_management_system.git'
+            }
+        }
+        stage('Parallel Checks') {
+            parallel {
+                stage('Database Check') {
+                    steps {
+                        dir('project_3') {
+                            bat 'python db_check.py'
+                        }
+                    }
+                }
+                stage('Dashboard Check') {
+                    steps {
+                        dir('project_3') {
+                            bat 'python dashboard_check.py'
+                        }
+                    }
+                }
+            }
+        }
+        stage('Summary') {
+            steps {
+                echo 'Both frontend and backend checks are complete.'
+            }
+        }
+    }
+}
