@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/<student-username>/<repo-name>.git'
+            }
+        }
+        stage('Parallel Component Checks') {
+            parallel {
+                stage('Database Verification') {
+                    steps {
+                        bat 'python db_check.py'
+                    }
+                }
+                stage('Dashboard Verification') {
+                    steps {
+                        bat 'python dashboard_check.py'
+                    }
+                }
+            }
+        }
+        stage('Summary') {
+            steps {
+                echo 'Both database verification and student dashboard checks completed successfully.'
+            }
+        }
+    }
+}
