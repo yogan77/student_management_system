@@ -9,14 +9,14 @@ pipeline {
         stage('Generate Report') {
             steps {
                 // This line forces Jenkins to look inside the project2 folder
-                dir('project2') {
+                dir('project_2') {
                     bat 'python app.py'
                 }
             }
         }
         stage('Archive Report') {
             steps {
-                dir('project2') {
+                dir('project_2') {
                     archiveArtifacts artifacts: 'report.txt', fingerprint: true
                 }
             }
