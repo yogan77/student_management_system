@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Adjust repo URL to your repository details
-                git branch: 'main', url: 'https://github.com/<student-username>/<repo-name>.git'
+                git branch: 'main', url: 'https://github.com/yogan77/student_management_system.git'
             }
         }
         stage('Show Parameter') {
