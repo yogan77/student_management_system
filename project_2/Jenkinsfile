@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Generate Report') {
             steps {
-                // Tells Jenkins to go inside the project2 folder before running Python
+                // This line forces Jenkins to look inside the project2 folder
                 dir('project2') {
                     bat 'python app.py'
                 }
